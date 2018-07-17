@@ -1,15 +1,14 @@
 apply plugin: 'com.android.application'
-
 apply plugin: 'kotlin-android'
-
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
 
 android {
-    compileSdkVersion 27
+    compileSdkVersion 28
     defaultConfig {
         applicationId "com.filip.babic.coroutinesexpo"
         minSdkVersion 21
-        targetSdkVersion 27
+        targetSdkVersion 28
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -20,27 +19,38 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    kapt {
+        generateStubs = true
+    }
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
-    implementation 'com.android.support:appcompat-v7:27.1.1'
-    implementation 'com.android.support.constraint:constraint-layout:1.1.0'
+    //core modules
+    implementation project(':core')
+    implementation project(':domain')
+    implementation project(':data')
 
-    implementation "com.squareup.retrofit2:retrofit:$retrofit"
-    implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofit"
-    implementation "com.google.code.gson:gson:$gson"
-    implementation "com.squareup.okhttp3:logging-interceptor:$okHttp"
-    implementation "com.squareup.retrofit2:converter-gson:$retrofit"
+    //feature-specific modules
+    implementation project(':splash')
+    implementation project(':login')
+    implementation project(':register')
 
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines"
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines"
+    //ui
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlinVersion"
 
-    testImplementation "org.mockito:mockito-core:2.17.0"
-    testImplementation "com.nhaarman:mockito-kotlin:1.5.0"
-    testImplementation 'junit:junit:4.12'
+    //di
+    implementation "org.koin:koin-core:$koin"
+    implementation "org.koin:koin-android:$koin"
+    implementation "org.koin:koin-android:$koin"
+    implementation "org.koin:koin-android-scope:$koin"
+    implementation "org.koin:koin-android-viewmodel:$koin"
+
+    //leaks
+    debugImplementation 'com.squareup.leakcanary:leakcanary-android:1.5.4'
+    releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.4'
 }
 
 kotlin {

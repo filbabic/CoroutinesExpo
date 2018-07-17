@@ -1,10 +1,4 @@
 <resources>
-    <string name="app_name">CoroutinesExpo</string>
+    <string name="app_name">NewGamesPlus</string>
 
-    <string name="humidity_format">Humidity: %d %%</string>
-    <string name="max_temperature_format">Hottest it\'ll be: %.2f C</string>
-    <string name="min_temperature_format">Coldest it\'ll be: %.2f C</string>
-    <string name="current_temperature_format">Now it\'s: %.2f C</string>
-    <string name="wind_speed_format">Wind is blowing: %.2f mph</string>
-    <string name="pressure_format">Atmospheric pressure: %.2f</string>
 </resources>
